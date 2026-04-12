@@ -135,9 +135,7 @@ def CompoundParser(compound: str) -> str:
     """
     try:
         result = xraylib.CompoundParser(compound)
-        return _result_json(
-            "CompoundParser", result, "", {"compound": compound}
-        )
+        return _result_json("CompoundParser", result, "", {"compound": compound})
     except Exception as e:
         return _error_json("CompoundParser", e)
 
@@ -260,9 +258,7 @@ def AtomicLevelWidth(Z: int, shell: str) -> str:
     try:
         shell_int = resolve_shell(shell)
         result = xraylib.AtomicLevelWidth(Z, shell_int)
-        return _result_json(
-            "AtomicLevelWidth", result, "keV", {"Z": Z, "shell": shell}
-        )
+        return _result_json("AtomicLevelWidth", result, "keV", {"Z": Z, "shell": shell})
     except Exception as e:
         return _error_json("AtomicLevelWidth", e)
 
@@ -975,9 +971,7 @@ def CS_Total_Kissel(Z: int, E: float) -> str:
     """
     try:
         result = xraylib.CS_Total_Kissel(Z, E)
-        return _result_json(
-            "CS_Total_Kissel", result, "cm2/g", {"Z": Z, "E_keV": E}
-        )
+        return _result_json("CS_Total_Kissel", result, "cm2/g", {"Z": Z, "E_keV": E})
     except Exception as e:
         return _error_json("CS_Total_Kissel", e)
 
@@ -1009,9 +1003,7 @@ def CS_Photo_Total(Z: int, E: float) -> str:
     """
     try:
         result = xraylib.CS_Photo_Total(Z, E)
-        return _result_json(
-            "CS_Photo_Total", result, "cm2/g", {"Z": Z, "E_keV": E}
-        )
+        return _result_json("CS_Photo_Total", result, "cm2/g", {"Z": Z, "E_keV": E})
     except Exception as e:
         return _error_json("CS_Photo_Total", e)
 
@@ -1434,9 +1426,7 @@ def CosKronTransProb(Z: int, trans: str) -> str:
     try:
         trans_int = resolve_transition(trans)
         result = xraylib.CosKronTransProb(Z, trans_int)
-        return _result_json(
-            "CosKronTransProb", result, "", {"Z": Z, "trans": trans}
-        )
+        return _result_json("CosKronTransProb", result, "", {"Z": Z, "trans": trans})
     except Exception as e:
         return _error_json("CosKronTransProb", e)
 
@@ -1929,9 +1919,7 @@ def GetCompoundDataNISTByName(name: str) -> str:
             "massFractions": result["massFractions"],
             "density": result["density"],
         }
-        return _result_json(
-            "GetCompoundDataNISTByName", data, "", {"name": name}
-        )
+        return _result_json("GetCompoundDataNISTByName", data, "", {"name": name})
     except Exception as e:
         return _error_json("GetCompoundDataNISTByName", e)
 
@@ -1952,9 +1940,7 @@ def GetCompoundDataNISTByIndex(index: int) -> str:
             "massFractions": result["massFractions"],
             "density": result["density"],
         }
-        return _result_json(
-            "GetCompoundDataNISTByIndex", data, "", {"index": index}
-        )
+        return _result_json("GetCompoundDataNISTByIndex", data, "", {"index": index})
     except Exception as e:
         return _error_json("GetCompoundDataNISTByIndex", e)
 
@@ -2014,9 +2000,7 @@ def ListAugerConstants() -> str:
 def ListNISTCompoundConstants() -> str:
     """List all available NIST compound constant names."""
     try:
-        return _result_json(
-            "ListNISTCompoundConstants", list_nist_compounds(), "", {}
-        )
+        return _result_json("ListNISTCompoundConstants", list_nist_compounds(), "", {})
     except Exception as e:
         return _error_json("ListNISTCompoundConstants", e)
 

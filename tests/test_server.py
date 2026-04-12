@@ -181,33 +181,53 @@ class TestErrorJson:
 
 class TestMain:
     def test_stdio_default(self):
-        with patch.object(mcp, "run") as mock_run, \
-             patch("sys.argv", ["xraylib-mcp-server"]):
+        with (
+            patch.object(mcp, "run") as mock_run,
+            patch("sys.argv", ["xraylib-mcp-server"]),
+        ):
             main()
             mock_run.assert_called_once_with()
 
     def test_http_transport(self):
-        with patch.object(mcp, "run") as mock_run, \
-             patch("sys.argv", [
-                 "xraylib-mcp-server",
-                 "--transport", "http",
-                 "--host", "localhost",
-                 "--port", "9000",
-             ]):
+        with (
+            patch.object(mcp, "run") as mock_run,
+            patch(
+                "sys.argv",
+                [
+                    "xraylib-mcp-server",
+                    "--transport",
+                    "http",
+                    "--host",
+                    "localhost",
+                    "--port",
+                    "9000",
+                ],
+            ),
+        ):
             main()
             mock_run.assert_called_once_with(
-                transport="http", host="localhost", port=9000,
+                transport="http",
+                host="localhost",
+                port=9000,
             )
 
     def test_sse_transport(self):
-        with patch.object(mcp, "run") as mock_run, \
-             patch("sys.argv", [
-                 "xraylib-mcp-server",
-                 "--transport", "sse",
-             ]):
+        with (
+            patch.object(mcp, "run") as mock_run,
+            patch(
+                "sys.argv",
+                [
+                    "xraylib-mcp-server",
+                    "--transport",
+                    "sse",
+                ],
+            ),
+        ):
             main()
             mock_run.assert_called_once_with(
-                transport="sse", host="0.0.0.0", port=8000,
+                transport="sse",
+                host="0.0.0.0",
+                port=8000,
             )
 
 
@@ -390,9 +410,7 @@ class TestCSTotal:
         data = _parse(CS_Total(26, 10.0))
         _assert_success(data, "CS_Total")
         assert data["units"] == "cm2/g"
-        assert data["result"] == pytest.approx(
-            xraylib.CS_Total(26, 10.0), rel=1e-6
-        )
+        assert data["result"] == pytest.approx(xraylib.CS_Total(26, 10.0), rel=1e-6)
 
     def test_invalid_energy(self):
         data = _parse(CS_Total(26, 0.0))
@@ -1180,8 +1198,10 @@ class TestGetCompoundDataNISTList:
         assert len(data["result"]) > 0
 
     def test_error(self):
-        with patch("xraylib_mcp_server.server.xraylib.GetCompoundDataNISTList",
-                    side_effect=RuntimeError("boom")):
+        with patch(
+            "xraylib_mcp_server.server.xraylib.GetCompoundDataNISTList",
+            side_effect=RuntimeError("boom"),
+        ):
             data = _parse(GetCompoundDataNISTList())
             _assert_error(data, "GetCompoundDataNISTList")
 
@@ -1220,31 +1240,39 @@ class TestListConstants:
 
 class TestListConstantsErrors:
     def test_list_line_error(self):
-        with patch("xraylib_mcp_server.server.list_lines",
-                    side_effect=RuntimeError("boom")):
+        with patch(
+            "xraylib_mcp_server.server.list_lines", side_effect=RuntimeError("boom")
+        ):
             data = _parse(ListLineConstants())
             _assert_error(data, "ListLineConstants")
 
     def test_list_shell_error(self):
-        with patch("xraylib_mcp_server.server.list_shells",
-                    side_effect=RuntimeError("boom")):
+        with patch(
+            "xraylib_mcp_server.server.list_shells", side_effect=RuntimeError("boom")
+        ):
             data = _parse(ListShellConstants())
             _assert_error(data, "ListShellConstants")
 
     def test_list_transition_error(self):
-        with patch("xraylib_mcp_server.server.list_transitions",
-                    side_effect=RuntimeError("boom")):
+        with patch(
+            "xraylib_mcp_server.server.list_transitions",
+            side_effect=RuntimeError("boom"),
+        ):
             data = _parse(ListTransitionConstants())
             _assert_error(data, "ListTransitionConstants")
 
     def test_list_auger_error(self):
-        with patch("xraylib_mcp_server.server.list_auger_transitions",
-                    side_effect=RuntimeError("boom")):
+        with patch(
+            "xraylib_mcp_server.server.list_auger_transitions",
+            side_effect=RuntimeError("boom"),
+        ):
             data = _parse(ListAugerConstants())
             _assert_error(data, "ListAugerConstants")
 
     def test_list_nist_error(self):
-        with patch("xraylib_mcp_server.server.list_nist_compounds",
-                    side_effect=RuntimeError("boom")):
+        with patch(
+            "xraylib_mcp_server.server.list_nist_compounds",
+            side_effect=RuntimeError("boom"),
+        ):
             data = _parse(ListNISTCompoundConstants())
             _assert_error(data, "ListNISTCompoundConstants")
