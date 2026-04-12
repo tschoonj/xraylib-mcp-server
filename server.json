@@ -1,0 +1,32 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.tschoonj/xraylib-mcp-server",
+  "description": "MCP server providing X-ray interaction data via xraylib",
+  "repository": {
+    "url": "https://github.com/tschoonj/xraylib-mcp-server",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "registryBaseUrl": "https://pypi.org",
+      "identifier": "xraylib-mcp-server",
+      "version": "0.1.0",
+      "runtimeHint": "uvx",
+      "transport": {
+        "type": "stdio"
+      }
+    },
+    {
+      "registryType": "oci",
+      "registryBaseUrl": "https://ghcr.io",
+      "identifier": "tschoonj/xraylib-mcp",
+      "version": "0.1.0",
+      "runtimeHint": "docker",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
