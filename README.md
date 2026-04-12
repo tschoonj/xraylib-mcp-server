@@ -1,10 +1,10 @@
 # xraylib MCP Server
 
-<!-- mcp-name: io.github.tschoonj/xraylib-mcp-server-server -->
+<!-- mcp-name: io.github.tschoonj/xraylib-mcp-server -->
 
 [![CI](https://github.com/tschoonj/xraylib-mcp-server/actions/workflows/ci.yml/badge.svg)](https://github.com/tschoonj/xraylib-mcp-server/actions/workflows/ci.yml)
 [![Docker](https://github.com/tschoonj/xraylib-mcp-server/actions/workflows/docker.yml/badge.svg)](https://github.com/tschoonj/xraylib-mcp-server/actions/workflows/docker.yml)
-[![Docker Image](https://img.shields.io/badge/docker-ghcr.io%2Ftschoonj%2Fxraylib--mcp-blue)](https://github.com/tschoonj/xraylib-mcp-server/pkgs/container/xraylib-mcp)
+[![Docker Image](https://img.shields.io/badge/docker-ghcr.io%2Ftschoonj%2Fxraylib--mcp--server-blue)](https://github.com/tschoonj/xraylib-mcp-server/pkgs/container/xraylib-mcp-server)
 [![PyPI](https://img.shields.io/pypi/v/xraylib-mcp-server)](https://pypi.org/project/xraylib-mcp-server/)
 [![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
@@ -194,7 +194,7 @@ docker run --rm -p 8000:8000 xraylib-mcp-server xraylib-mcp-server --transport h
 ```bash
 # Clone the repository
 git clone https://github.com/tschoonj/xraylib-mcp-server.git
-cd xraylib-mcp
+cd xraylib-mcp-server
 
 # Install development dependencies
 uv sync --dev
