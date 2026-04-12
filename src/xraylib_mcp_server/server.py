@@ -2035,7 +2035,9 @@ def main() -> None:
     if args.transport == "stdio":
         mcp.run()
     else:
-        mcp.run(transport=args.transport, host=args.host, port=args.port)
+        mcp.settings.host = args.host
+        mcp.settings.port = args.port
+        mcp.run(transport=args.transport)
 
 
 if __name__ == "__main__":  # pragma: no cover

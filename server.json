@@ -20,8 +20,7 @@
     },
     {
       "registryType": "oci",
-      "registryBaseUrl": "https://ghcr.io",
-      "identifier": "tschoonj/xraylib-mcp",
+      "identifier": "ghcr.io/tschoonj/xraylib-mcp-server",
       "version": "0.1.0",
       "runtimeHint": "docker",
       "transport": {

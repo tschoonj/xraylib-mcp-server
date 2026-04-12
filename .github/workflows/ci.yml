@@ -66,7 +66,6 @@ jobs:
     - name: Run mypy type checking
       run: |
         uv run mypy src/ --ignore-missing-imports
-      continue-on-error: true  # Don't fail CI on mypy errors initially
 
   publish:
     name: Publish to PyPI and MCP Registry
@@ -113,6 +112,9 @@ jobs:
     - name: Install MCP Publisher
       run: |
         curl -L "https://github.com/modelcontextprotocol/registry/releases/download/v1.5.0/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+
+    - name: Validate server.json
+      run: ./mcp-publisher validate
 
     - name: Login to MCP Registry
       run: ./mcp-publisher login github-oidc
