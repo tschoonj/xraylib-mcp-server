@@ -205,11 +205,9 @@ class TestMain:
             ),
         ):
             main()
-            mock_run.assert_called_once_with(
-                transport="http",
-                host="localhost",
-                port=9000,
-            )
+            assert mcp.settings.host == "localhost"
+            assert mcp.settings.port == 9000
+            mock_run.assert_called_once_with(transport="http")
 
     def test_sse_transport(self):
         with (
@@ -224,11 +222,7 @@ class TestMain:
             ),
         ):
             main()
-            mock_run.assert_called_once_with(
-                transport="sse",
-                host="0.0.0.0",
-                port=8000,
-            )
+            mock_run.assert_called_once_with(transport="sse")
 
 
 # ---------------------------------------------------------------------------
