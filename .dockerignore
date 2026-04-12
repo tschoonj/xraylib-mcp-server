@@ -1,0 +1,44 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.py[cod]
+*.egg-info
+dist
+build
+.eggs
+
+# Virtual environments
+.venv
+venv
+
+# Testing
+tests
+.pytest_cache
+.coverage
+htmlcov
+.mypy_cache
+
+# IDE
+.idea
+.vscode
+
+# Docker
+Dockerfile
+.dockerignore
+docker-run.sh
+
+# CI
+.github
+
+# Docs
+examples
+
+# OS
+.DS_Store
+
+# Project specific
+.mcpregistry_github_token
+.mcpregistry_registry_token
