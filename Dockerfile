@@ -49,5 +49,6 @@ CMD ["xraylib-mcp-server", "--transport", "stdio"]
 LABEL org.opencontainers.image.title="xraylib MCP Server"
 LABEL org.opencontainers.image.description="Model Context Protocol server for xraylib X-ray interaction data"
 LABEL org.opencontainers.image.version="0.1.0"
-LABEL org.opencontainers.image.source="https://github.com/tschoonj/xraylib-mcp"
+LABEL org.opencontainers.image.source="https://github.com/tschoonj/xraylib-mcp-server"
 LABEL org.opencontainers.image.licenses="BSD-3-Clause"
+LABEL io.modelcontextprotocol.server.name="io.github.tschoonj/xraylib-mcp-server"
