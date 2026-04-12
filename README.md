@@ -1,8 +1,10 @@
 # xraylib MCP Server
 
-[![CI](https://github.com/tschoonj/xraylib-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/tschoonj/xraylib-mcp/actions/workflows/ci.yml)
-[![Docker](https://github.com/tschoonj/xraylib-mcp/actions/workflows/docker.yml/badge.svg)](https://github.com/tschoonj/xraylib-mcp/actions/workflows/docker.yml)
-[![Docker Image](https://img.shields.io/badge/docker-ghcr.io%2Ftschoonj%2Fxraylib--mcp-blue)](https://github.com/tschoonj/xraylib-mcp/pkgs/container/xraylib-mcp)
+<!-- mcp-name: io.github.tschoonj/xraylib-mcp-server-server -->
+
+[![CI](https://github.com/tschoonj/xraylib-mcp-server/actions/workflows/ci.yml/badge.svg)](https://github.com/tschoonj/xraylib-mcp-server/actions/workflows/ci.yml)
+[![Docker](https://github.com/tschoonj/xraylib-mcp-server/actions/workflows/docker.yml/badge.svg)](https://github.com/tschoonj/xraylib-mcp-server/actions/workflows/docker.yml)
+[![Docker Image](https://img.shields.io/badge/docker-ghcr.io%2Ftschoonj%2Fxraylib--mcp-blue)](https://github.com/tschoonj/xraylib-mcp-server/pkgs/container/xraylib-mcp)
 [![PyPI](https://img.shields.io/pypi/v/xraylib-mcp-server)](https://pypi.org/project/xraylib-mcp-server/)
 [![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
@@ -112,7 +114,7 @@ Or using the pre-built Docker image:
   "mcpServers": {
     "xraylib": {
       "command": "docker",
-      "args": ["run", "-i", "--rm", "ghcr.io/tschoonj/xraylib-mcp:latest"]
+      "args": ["run", "-i", "--rm", "ghcr.io/tschoonj/xraylib-mcp-server:latest"]
     }
   }
 }
@@ -140,7 +142,7 @@ Or using the pre-built Docker image:
   "mcp.servers": {
     "xraylib": {
       "command": "docker",
-      "args": ["run", "-i", "--rm", "ghcr.io/tschoonj/xraylib-mcp:latest"]
+      "args": ["run", "-i", "--rm", "ghcr.io/tschoonj/xraylib-mcp-server:latest"]
     }
   }
 }
@@ -159,17 +161,17 @@ uv run mcp dev src/xraylib_mcp_server/server.py
 
 ```bash
 # Pull the latest image
-docker pull ghcr.io/tschoonj/xraylib-mcp:latest
+docker pull ghcr.io/tschoonj/xraylib-mcp-server:latest
 
 # Run with stdio transport
-docker run -i --rm ghcr.io/tschoonj/xraylib-mcp:latest
+docker run -i --rm ghcr.io/tschoonj/xraylib-mcp-server:latest
 
 # Run with HTTP transport on port 8000
-docker run --rm -p 8000:8000 ghcr.io/tschoonj/xraylib-mcp:latest xraylib-mcp-server --transport http --port 8000
+docker run --rm -p 8000:8000 ghcr.io/tschoonj/xraylib-mcp-server:latest xraylib-mcp-server --transport http --port 8000
 
 # Use a specific version
-docker pull ghcr.io/tschoonj/xraylib-mcp:0.1.0
-docker run -i --rm ghcr.io/tschoonj/xraylib-mcp:0.1.0
+docker pull ghcr.io/tschoonj/xraylib-mcp-server:0.1.0
+docker run -i --rm ghcr.io/tschoonj/xraylib-mcp-server:0.1.0
 ```
 
 #### Local development with Docker
@@ -191,7 +193,7 @@ docker run --rm -p 8000:8000 xraylib-mcp-server xraylib-mcp-server --transport h
 
 ```bash
 # Clone the repository
-git clone https://github.com/tschoonj/xraylib-mcp.git
+git clone https://github.com/tschoonj/xraylib-mcp-server.git
 cd xraylib-mcp
 
 # Install development dependencies
