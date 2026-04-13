@@ -9,6 +9,21 @@
 
 A [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server that provides access to [xraylib](https://github.com/tschoonj/xraylib) X-ray interaction data through a standardized interface. Query cross-sections, fluorescence lines, edge energies, and more from any MCP-compatible client.
 
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [As a standalone server](#as-a-standalone-server)
+  - [With Claude Desktop](#with-claude-desktop)
+  - [With VS Code](#with-vs-code)
+  - [With Claude Code](#with-claude-code)
+  - [As a development server](#as-a-development-server)
+  - [Using Docker](#using-docker)
+- [Development](#development)
+- [License](#license)
+- [Contributing](#contributing)
+
 ## Features
 
 This server exposes 101 tools organized into the following categories:
