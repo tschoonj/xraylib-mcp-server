@@ -3,7 +3,6 @@
 <!-- mcp-name: io.github.tschoonj/xraylib-mcp-server -->
 
 [![CI](https://github.com/tschoonj/xraylib-mcp-server/actions/workflows/ci.yml/badge.svg)](https://github.com/tschoonj/xraylib-mcp-server/actions/workflows/ci.yml)
-[![Docker](https://github.com/tschoonj/xraylib-mcp-server/actions/workflows/docker.yml/badge.svg)](https://github.com/tschoonj/xraylib-mcp-server/actions/workflows/docker.yml)
 [![Docker Image](https://img.shields.io/badge/docker-ghcr.io%2Ftschoonj%2Fxraylib--mcp--server-blue)](https://github.com/tschoonj/xraylib-mcp-server/pkgs/container/xraylib-mcp-server)
 [![PyPI](https://img.shields.io/pypi/v/xraylib-mcp-server)](https://pypi.org/project/xraylib-mcp-server/)
 [![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
@@ -146,6 +145,20 @@ Or using the pre-built Docker image:
     }
   }
 }
+```
+
+### With Claude Code
+
+Add the server using the CLI:
+
+```bash
+claude mcp add xraylib -- uvx xraylib-mcp-server
+```
+
+Or using the pre-built Docker image:
+
+```bash
+claude mcp add xraylib -- docker run -i --rm ghcr.io/tschoonj/xraylib-mcp-server:latest
 ```
 
 ### As a development server
