@@ -22,7 +22,19 @@ from xraylib_mcp_server.constants import (
 )
 
 
-mcp = FastMCP("xraylib X-ray Interaction Data Server")
+mcp = FastMCP(
+    "xraylib X-ray Interaction Data Server",
+    instructions=(
+        "When querying compound/material data, always check the NIST compound "
+        "database first (GetCompoundDataNISTByName) before falling back to "
+        "CompoundParser. The NIST database provides vetted compositions and "
+        "densities for common materials. "
+        "When the user asks about something that looks like a radionuclide "
+        "(e.g. 55Fe, 241Am, 109Cd), use the radionuclide API first "
+        "(GetRadioNuclideDataByName) to retrieve its X-ray lines, intensities, "
+        "and gamma data."
+    ),
+)
 
 
 def _result_json(
