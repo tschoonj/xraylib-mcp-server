@@ -26,7 +26,7 @@ A [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server that pr
 
 ## Features
 
-This server exposes 101 tools organized into the following categories:
+This server exposes 104 tools organized into the following categories:
 
 ### Utility tools
 - **AtomicNumberToSymbol** / **SymbolToAtomicNumber** -- convert between atomic numbers and element symbols
@@ -73,6 +73,9 @@ This server exposes 101 tools organized into the following categories:
 
 ### NIST compounds
 - **GetCompoundDataNISTByName** / **GetCompoundDataNISTByIndex** / **GetCompoundDataNISTList** -- access the built-in NIST compound database
+
+### Radionuclide data
+- **GetRadioNuclideDataByName** / **GetRadioNuclideDataByIndex** / **GetRadioNuclideDataList** -- access the built-in radionuclide database (X-ray lines, intensities, gamma energies)
 
 ### Constant listings
 - **ListLineConstants** / **ListShellConstants** / **ListTransitionConstants** / **ListAugerConstants** / **ListNISTCompoundConstants** -- enumerate valid constant names

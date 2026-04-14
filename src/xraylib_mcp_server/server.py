@@ -21,8 +21,25 @@ from xraylib_mcp_server.constants import (
     resolve_transition,
 )
 
+# Cache static lists at module load time
+_NIST_COMPOUNDS: list[str] = list(xraylib.GetCompoundDataNISTList())
+_RADIONUCLIDES: list[str] = list(xraylib.GetRadioNuclideDataList())
 
-mcp = FastMCP("xraylib X-ray Interaction Data Server")
+mcp = FastMCP(
+    "xraylib X-ray Interaction Data Server",
+    instructions=(
+        "When querying compound/material data, match the user's query against "
+        "the NIST compound list below and use GetCompoundDataNISTByName with the "
+        "exact name before falling back to CompoundParser. The NIST database "
+        "provides vetted compositions and densities for common materials.\n"
+        "Available NIST compounds: " + ", ".join(_NIST_COMPOUNDS) + "\n\n"
+        "When the user asks about something that looks like a radionuclide "
+        "(e.g. 55Fe, 241Am, 109Cd), match it against the radionuclide list "
+        "below and use GetRadioNuclideDataByName to retrieve its X-ray lines, "
+        "intensities, and gamma data.\n"
+        "Available radionuclides: " + ", ".join(_RADIONUCLIDES)
+    ),
+)
 
 
 def _result_json(
@@ -1953,6 +1970,74 @@ def GetCompoundDataNISTList() -> str:
         return _result_json("GetCompoundDataNISTList", result, "", {})
     except Exception as e:
         return _error_json("GetCompoundDataNISTList", e)
+
+
+# ---------------------------------------------------------------------------
+# Radionuclide data tools
+
+
+@mcp.tool()
+def GetRadioNuclideDataByName(name: str) -> str:
+    """Get radionuclide data by name.
+
+    Args:
+        name: Radionuclide name, e.g. "55Fe", "241Am", "109Cd"
+    """
+    try:
+        result = xraylib.GetRadioNuclideDataByName(name)
+        data = {
+            "name": result["name"],
+            "Z": result["Z"],
+            "A": result["A"],
+            "N": result["N"],
+            "Z_xray": result["Z_xray"],
+            "nXrays": result["nXrays"],
+            "nGammas": result["nGammas"],
+            "XrayLines": list(result["XrayLines"]),
+            "XrayIntensities": list(result["XrayIntensities"]),
+            "GammaEnergies": list(result["GammaEnergies"]),
+            "GammaIntensities": list(result["GammaIntensities"]),
+        }
+        return _result_json("GetRadioNuclideDataByName", data, "", {"name": name})
+    except Exception as e:
+        return _error_json("GetRadioNuclideDataByName", e)
+
+
+@mcp.tool()
+def GetRadioNuclideDataByIndex(index: int) -> str:
+    """Get radionuclide data by index number.
+
+    Args:
+        index: Radionuclide index (0-based)
+    """
+    try:
+        result = xraylib.GetRadioNuclideDataByIndex(index)
+        data = {
+            "name": result["name"],
+            "Z": result["Z"],
+            "A": result["A"],
+            "N": result["N"],
+            "Z_xray": result["Z_xray"],
+            "nXrays": result["nXrays"],
+            "nGammas": result["nGammas"],
+            "XrayLines": list(result["XrayLines"]),
+            "XrayIntensities": list(result["XrayIntensities"]),
+            "GammaEnergies": list(result["GammaEnergies"]),
+            "GammaIntensities": list(result["GammaIntensities"]),
+        }
+        return _result_json("GetRadioNuclideDataByIndex", data, "", {"index": index})
+    except Exception as e:
+        return _error_json("GetRadioNuclideDataByIndex", e)
+
+
+@mcp.tool()
+def GetRadioNuclideDataList() -> str:
+    """Get the list of all available radionuclide names."""
+    try:
+        result = xraylib.GetRadioNuclideDataList()
+        return _result_json("GetRadioNuclideDataList", list(result), "", {})
+    except Exception as e:
+        return _error_json("GetRadioNuclideDataList", e)
 
 
 # ---------------------------------------------------------------------------
