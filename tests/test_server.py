@@ -105,6 +105,9 @@ from xraylib_mcp_server.server import (
     GetCompoundDataNISTByIndex,
     GetCompoundDataNISTByName,
     GetCompoundDataNISTList,
+    GetRadioNuclideDataByIndex,
+    GetRadioNuclideDataByName,
+    GetRadioNuclideDataList,
     JumpFactor,
     LineEnergy,
     ListAugerConstants,
@@ -1198,6 +1201,61 @@ class TestGetCompoundDataNISTList:
         ):
             data = _parse(GetCompoundDataNISTList())
             _assert_error(data, "GetCompoundDataNISTList")
+
+
+# ---------------------------------------------------------------------------
+# Radionuclide data tools — success + error
+# ---------------------------------------------------------------------------
+
+
+class TestGetRadioNuclideDataByName:
+    def test_fe55(self):
+        data = _parse(GetRadioNuclideDataByName("55Fe"))
+        _assert_success(data, "GetRadioNuclideDataByName")
+        assert data["result"]["name"] == "55Fe"
+        assert data["result"]["Z"] == 26
+        assert data["result"]["A"] == 55
+        assert data["result"]["N"] == 29
+        assert data["result"]["Z_xray"] == 25
+        assert data["result"]["nXrays"] > 0
+        assert len(data["result"]["XrayLines"]) == data["result"]["nXrays"]
+        assert len(data["result"]["XrayIntensities"]) == data["result"]["nXrays"]
+        assert len(data["result"]["GammaEnergies"]) == data["result"]["nGammas"]
+        assert len(data["result"]["GammaIntensities"]) == data["result"]["nGammas"]
+
+    def test_invalid_name(self):
+        data = _parse(GetRadioNuclideDataByName("99Xx"))
+        _assert_error(data, "GetRadioNuclideDataByName")
+
+
+class TestGetRadioNuclideDataByIndex:
+    def test_index_zero(self):
+        data = _parse(GetRadioNuclideDataByIndex(0))
+        _assert_success(data, "GetRadioNuclideDataByIndex")
+        assert "name" in data["result"]
+        assert data["result"]["Z"] > 0
+        assert data["result"]["nXrays"] > 0
+
+    def test_invalid_index(self):
+        data = _parse(GetRadioNuclideDataByIndex(9999))
+        _assert_error(data, "GetRadioNuclideDataByIndex")
+
+
+class TestGetRadioNuclideDataList:
+    def test_returns_list(self):
+        data = _parse(GetRadioNuclideDataList())
+        _assert_success(data, "GetRadioNuclideDataList")
+        assert isinstance(data["result"], list)
+        assert len(data["result"]) > 0
+        assert "55Fe" in data["result"]
+
+    def test_error(self):
+        with patch(
+            "xraylib_mcp_server.server.xraylib.GetRadioNuclideDataList",
+            side_effect=RuntimeError("boom"),
+        ):
+            data = _parse(GetRadioNuclideDataList())
+            _assert_error(data, "GetRadioNuclideDataList")
 
 
 # ---------------------------------------------------------------------------
