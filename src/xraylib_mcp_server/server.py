@@ -21,18 +21,23 @@ from xraylib_mcp_server.constants import (
     resolve_transition,
 )
 
+# Cache static lists at module load time
+_NIST_COMPOUNDS: list[str] = list(xraylib.GetCompoundDataNISTList())
+_RADIONUCLIDES: list[str] = list(xraylib.GetRadioNuclideDataList())
 
 mcp = FastMCP(
     "xraylib X-ray Interaction Data Server",
     instructions=(
-        "When querying compound/material data, always check the NIST compound "
-        "database first (GetCompoundDataNISTByName) before falling back to "
-        "CompoundParser. The NIST database provides vetted compositions and "
-        "densities for common materials. "
+        "When querying compound/material data, match the user's query against "
+        "the NIST compound list below and use GetCompoundDataNISTByName with the "
+        "exact name before falling back to CompoundParser. The NIST database "
+        "provides vetted compositions and densities for common materials.\n"
+        "Available NIST compounds: " + ", ".join(_NIST_COMPOUNDS) + "\n\n"
         "When the user asks about something that looks like a radionuclide "
-        "(e.g. 55Fe, 241Am, 109Cd), use the radionuclide API first "
-        "(GetRadioNuclideDataByName) to retrieve its X-ray lines, intensities, "
-        "and gamma data."
+        "(e.g. 55Fe, 241Am, 109Cd), match it against the radionuclide list "
+        "below and use GetRadioNuclideDataByName to retrieve its X-ray lines, "
+        "intensities, and gamma data.\n"
+        "Available radionuclides: " + ", ".join(_RADIONUCLIDES)
     ),
 )
 
